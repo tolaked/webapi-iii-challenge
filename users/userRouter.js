@@ -28,7 +28,7 @@ router.get("/:id/posts", getUserPosts);
 
 router.delete("/:id", deleteUser);
 
-// router.put("/:id", (req, res) => {});
+router.put("/:id", (req, res) => {});
 
 //custom middleware
 
