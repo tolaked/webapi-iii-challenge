@@ -1,11 +1,17 @@
 const express = require("express");
 const { newUser, getUserPosts, getUsers } = require("../controller/user");
-const { validateUser } = require("../middleware/validation");
+const {
+  validateUser,
+  validateUserId,
+  validatePost
+} = require("../middleware/validation");
 const router = express.Router();
+
+router.use("/:id", validateUserId, async (req, res) => {});
 
 router.post("/postuser", validateUser, newUser);
 
-router.post("/:id/posts", getUserPosts);
+router.post("/:id/posts", validateUserId);
 
 router.get("/", getUsers);
 
