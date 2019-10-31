@@ -18,12 +18,12 @@ server.get("/", (req, res) => {
 
 server.listen(3000, () => console.log("App running on port 3000"));
 
-// function logger(req, res, next) {
-//   // const { method, url } = req;
-//   // const date = new Date();
-//   // console.log(`[${date.toTimeString()}] ${method.toUpperCase()} to ${url}`);
-//   console.log("Hey logger here");
-//   next();
-// }
+function logger(req, res, next) {
+  // const { method, url } = req;
+  // const date = new Date();
+  // console.log(`[${date.toTimeString()}] ${method.toUpperCase()} to ${url}`);
+  // console.log("Hey logger here");
+  next();
+}
 
 module.exports = server;

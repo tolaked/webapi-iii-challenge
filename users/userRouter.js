@@ -1,5 +1,10 @@
 const express = require("express");
-const { newUser, getUserPosts, getUsers } = require("../controller/user");
+const {
+  newUser,
+  getUserPosts,
+  getUsers,
+  deleteUser
+} = require("../controller/user");
 const {
   validateUser,
   validateUserId,
@@ -7,19 +12,21 @@ const {
 } = require("../middleware/validation");
 const router = express.Router();
 
-router.use("/:id", validateUserId, async (req, res) => {});
+router.use("/:id", validateUserId);
 
 router.post("/postuser", validateUser, newUser);
 
-router.post("/:id/posts", validateUserId);
+router.post("/:id/posts", validatePost, async (req, res) => {});
 
 router.get("/", getUsers);
 
-// router.get("/:id", (req, res) => {});
+router.get("/:id", (req, res) => {
+  return res.status(200).json(req.user);
+});
 
-// router.get("/:id/posts", (req, res) => {});
+router.get("/:id/posts", getUserPosts);
 
-// router.delete("/:id", (req, res) => {});
+router.delete("/:id", deleteUser);
 
 // router.put("/:id", (req, res) => {});
 

@@ -3,7 +3,8 @@ const db = require("../users/userDb");
 module.exports = {
   newUser,
   getUserPosts,
-  getUsers
+  getUsers,
+  deleteUser
 };
 
 async function newUser(req, res) {
@@ -40,4 +41,15 @@ function getUsers(req, res) {
       users
     });
   });
+}
+
+async function deleteUser(req, res) {
+  try {
+    const count = await db.remove(req.user.id);
+    if (count > 0) {
+      return res.status(204).send();
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 }
