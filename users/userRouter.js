@@ -25,4 +25,13 @@ router.get("/", getUsers);
 
 // function validatePost(req, res, next) {}
 
+function errorHandler(err, req, res, next) {
+  if (err) {
+    const { status, message } = err;
+    return res.status(status).json({ message });
+  } else next();
+}
+
+router.use(errorHandler);
+
 module.exports = router;

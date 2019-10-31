@@ -6,15 +6,14 @@ module.exports = {
   getUsers
 };
 
-function newUser(req, res) {
+async function newUser(req, res) {
   const name = req.body;
   console.log(name);
   try {
-    db.insert(name).then(user => {
-      res.status(201).json({
-        success: true,
-        user
-      });
+    const user = await db.insert(name); //.then(user => {
+    return res.status(201).json({
+      success: true,
+      user
     });
   } catch ({ message }) {
     res.status(500).json({
